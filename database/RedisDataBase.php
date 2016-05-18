@@ -7,7 +7,7 @@ class RedisDataBase
 
 	public function __construct(array $config = [])
 	{
-		$config = $config + parse_ini_file('./config/db.ini', true)['redis'];
+		$config = $config + parse_ini_file(__DIR__ . '/../config/db.ini', true)['redis'];
 		try {
 			$host = $config['host'];
 			$port = $config['port'] ?? 6379;

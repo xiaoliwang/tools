@@ -1,7 +1,7 @@
 <?php
 require(__DIR__ . '/vendor/autoload.php');
 
-use tomcao\tools\datebase\MysqlDataBase;
+use tomcao\tools\database\MysqlDataBase;
 use tomcao\tools\database\RedisDataBase;
 use tomcao\tools\util\Logger;
 

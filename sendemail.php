@@ -27,12 +27,14 @@ $mail->Port = 465;
 $mail->SMTPSecure = 'ssl';
 
 $mail->SMTPAuth = true;
-$config = parse_ini_file('./config/email.ini');
+$config = parse_ini_file(__DIR__  . '/config/email.ini');
 $mail->Username = $config['username'];
 $mail->Password = $config['password'];
 
 $mail->setFrom('xiaoliwang@missevan.cn', '王小李');
 $mail->addReplyTo('xiaoliwang@missevan.cn', '王小李');
+
+$mail->addAddress('xiaoliwang@missevan.cn', '魔王');
 
 $mail->addAddress('mowangsk@missevan.cn', '魔王');
 $mail->addAddress('liutian7y@missevan.cn', '七夜');

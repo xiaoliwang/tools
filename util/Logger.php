@@ -16,6 +16,7 @@ class Logger
   public function __construct(String $DIR_LOG = '', array $options = [])
   {
     $this->options = $options + $this->options;
+    $DIR_LOG = __DIR__ . '/../' . $DIR_LOG;
     if ($DIR_LOG) {
     	if (!is_dir($DIR_LOG) || @mkdir($DIR_LOG, 0777, true))
     		throw new \Exception('Failed to create directory');

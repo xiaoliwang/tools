@@ -1,5 +1,5 @@
 <?php
-namespace tomcao\tools\datebase;
+namespace tomcao\tools\database;
 
 use tomcao\tools\exception\SqlException;
 
@@ -9,7 +9,7 @@ class MysqlDataBase
 
 	public function __construct(array $config = [])
 	{
-		$config = $config + parse_ini_file('./config/db.ini', true)['mysql'];
+		$config = $config + parse_ini_file(__DIR__ .'/../config/db.ini', true)['mysql'];
 		try {
 			$username = $config['username'];
 			$password = $config['password'];
