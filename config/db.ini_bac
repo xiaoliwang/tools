@@ -1,0 +1,13 @@
+﻿[mysql]
+host = ""
+port = ""
+dbname = ""
+username = ""
+password = ""
+[redis]
+host = ""
+port = ""
+auth = ""
+[email]
+username = ""
+password = ""

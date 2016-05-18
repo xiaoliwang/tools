@@ -1,0 +1,10 @@
+{
+	"autoload": {
+		"psr-4": {
+			"tomcao\\tools\\": ""
+		}
+	},
+	"require": {
+		"phpmailer/phpmailer": "^5.2"
+	}
+}
