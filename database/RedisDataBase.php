@@ -28,6 +28,11 @@ class RedisDataBase
 		return call_user_func_array([&$this->redis, $func], $args);
 	}
 
+	public function scan(&$begin, string $patten, int $count = 100)
+	{
+		return $this->redis->scan($begin, $patten, $count);
+	}
+
 	public function __destruct()
 	{
 		$this->redis && $this->redis->close();

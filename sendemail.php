@@ -1,5 +1,8 @@
 <?php
 require(__DIR__ . '/vendor/autoload.php');
+use tomcao\tools\util\MailSender;
+use tomcao\tools\util\Logger;
+
 $contents = [
 	"手机api及相关接口",
 	"自动化脚本实现",
@@ -7,57 +10,54 @@ $contents = [
 	"协助手机端调试",
 	"完善文档",
 	"音频处理接口",
-	"学习大数据相关知识",
-	"学习PHP的Command写法",
-	"研究shell脚本及linux操作",
-	"研究nginx优化",
-	"研究mysql5.7",
-	"研究mysql优化",
-	"测试代码",
+	//"学习大数据相关知识",
+	//"学习PHP的Command写法",
+	//"研究shell脚本及linux操作",
+	//"研究nginx优化",
+	//"研究mysql5.7",
+	//"研究mysql优化",
+	//"测试代码",
 	"优化代码",
 ];
 
-$mail = new PHPMailer;
-$mail->setLanguage('zh_cn', '/optional/path/to/language/directory/');
-$mail->CharSet = 'utf-8';
-$mail->isSMTP();
+$receivers = [
+	//'测试' => 'xiaoliwang@missevan.cn',
+	'魔王' => 'mowangsk@missevan.cn',
+	'七夜' => 'liutian7y@missevan.cn',
+	'昂基佬' => 'sa@missevan.cn'
+];
 
-$mail->Host = 'smtp.exmail.qq.com';
-$mail->Port = 465;
-$mail->SMTPSecure = 'ssl';
+$emailContent = function () use($contents)
+{
+	shuffle($contents);
+	$max = mt_rand(4, 6);
+	$content = "";
+	for ($i = 1; $i < $max; ++$i) {
+		$content .= "{$i}. $contents[$i] <br />";
+	}
+	$content .= '<br />Regards TomCao';
+	return $content;
+};
 
-$mail->SMTPAuth = true;
-$config = parse_ini_file(__DIR__  . '/config/email.ini');
-$mail->Username = $config['username'];
-$mail->Password = $config['password'];
+$mail = new MailSender;
+$logger = new Logger('./log', ['file_prefix' => 'sendEmail_']);
 
-$mail->setFrom('xiaoliwang@missevan.cn', '王小李');
-$mail->addReplyTo('xiaoliwang@missevan.cn', '王小李');
-
-$mail->addAddress('xiaoliwang@missevan.cn', '魔王');
-
-$mail->addAddress('mowangsk@missevan.cn', '魔王');
-$mail->addAddress('liutian7y@missevan.cn', '七夜');
-$mail->addAddress('sa@missevan.cn', '昂基佬');
+foreach ($receivers as $name => $email) {
+	$mail->addAddress($email, $name);
+}
 
 $date = date('n.j');
 $title = "{$date}工作日报";
 $mail->Subject = $title;
-
-shuffle($contents);
-$max = mt_rand(4, 6);
-$content = "";
-for ($i = 1; $i < $max; ++$i) {
-	$content .= "{$i}. $contents[$i] <br />";
-}
-$content .= '<br />Regards TomCao';
-
-$mail->Body = $content;
+$mail->Body = $emailContent();
 //Replace the plain text body with one created manually
 $mail->AltBody = 'This is a plain-text message body';
 
 if (!$mail->send()) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
+	$logger->log('Mailer Error: ' . $mail->ErrorInfo);
 } else {
-    echo "Message sent!";
+	$logger->log('Message sent!');
 }
+
+
+

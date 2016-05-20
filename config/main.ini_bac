@@ -1,0 +1,12 @@
+[email]
+host=""
+port=""
+smtpsecure=""
+username = ""
+nickname= ""
+password = ""
+[oss]
+bucket=""
+accessKeyId=""
+accessKeySecret=""
+endpoint=""
