@@ -27,16 +27,17 @@ function downloadPic(string $url): string
 function mosaic(string $path): string
 {
 	global $base_dir;
-	$base_name = basename($path);
-
+	$extension = pathinfo($path, PATHINFO_EXTENSION);
 	$picEdit = new PicEdit($path);
-	if ($picEdit->width > 1280) {
-		$height = intval(1280 / $picEdit->width * $picEdit->height);
-		$picEdit->thumbnailImage(1280, $height);
-	}
+	$base_name = basename($path, '.' . $extension);
+
+	$height = intval(1280 / $picEdit->width * $picEdit->height);
+	$picEdit->thumbnailImage(1280, $height, true);
+	$picEdit->cropImage(1280, 400, 0, 0);
+
 	$picEdit->blurImage(150, 50);
 	$picEdit->mosaicByWidth(50, 50);
-	$mosaic_path = $base_dir . $base_name . '_mosaic';
+	$mosaic_path = $base_dir . $base_name . '_mosaic.jpg';
 	$picEdit->writeImage($mosaic_path);
 	return $mosaic_path;
 }
@@ -48,7 +49,6 @@ function rmrf(string $dir) {
         } else {
             unlink($file);
         }
-
     }
     rmdir($dir);
 }
@@ -58,12 +58,11 @@ $sql_get_sounds = 'select id, cover_image from m_sound where cover_image != \'\'
 	
 $sounds = $mysql->query($sql_get_sounds);
 
-$i = 0;
 $logger->log('mission start');
 while ($sound = $sounds->fetch()) {
 	try {
 		$sid = $sound['id'];
-		if ($sound['cover_image'] && $i) {
+		if ($sound['cover_image']) {
 			$front_cover = 'http://static.missevan.com/covers/' . $sound['cover_image'];
 			$img_path = downloadPic($front_cover);
 			$mosaic_path = mosaic($img_path);
@@ -73,14 +72,10 @@ while ($sound = $sounds->fetch()) {
 		} else {
 			$logger->log("sound $sid get mosaic pic skip");
 		}
-		if (++$i === 3) {
-			throw new \Exception('test');
-		}	
 	} catch (\Exception $e) {
 		$sid = $sound['id'];
 		$logger->log("sound $sid get mosaic pic filed");
 		$logger->error("sound $sid get mosaic pic filed");
-		break;
 	}
 }
 $logger->log('get mosaic pic finished');
