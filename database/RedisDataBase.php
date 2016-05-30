@@ -12,8 +12,9 @@ class RedisDataBase
 			$host = $config['host'];
 			$port = $config['port'] ?? 6379;
 			$auth = $config['auth'] ?? '';
+			$timeout = $config['timeout'] ?? 1;
 			$this->redis = new \Redis();
-			$this->redis->connect($host, $port, 1, NULL, 100);
+			$this->redis->pconnect($host, $port, $timeout, NULL, 100);
 			$auth && $this->redis->auth($auth);
 			if ($this->redis->ping() !== '+PONG') {
 				throw new \Exception('password is wrong');
