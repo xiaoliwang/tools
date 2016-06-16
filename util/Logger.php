@@ -22,12 +22,12 @@ class Logger
     		throw new \Exception('Failed to create directory');
     	$log_file_name = $this->options['file_prefix'] . 'log.' . $this->options['extension'];
     	$log_error_name = $this->options['file_prefix'] . 'error.' . $this->options['extension'];
-    	$this->log_handle = fopen($DIR_LOG . '/' . $log_file_name, 'a');
-    	$this->error_handle = fopen($DIR_LOG . '/' . $log_error_name, 'a');
+    	$this->log_handle = fopen($DIR_LOG . '/' . $log_file_name, 'a+');
+    	$this->error_handle = fopen($DIR_LOG . '/' . $log_error_name, 'a+');
     	$this->command = false;
     } else {
-    	$this->log_handle = fopen('php://stdout', 'w');
-    	$this->error_handle = fopen('php://stderr', 'w');
+    	$this->log_handle = fopen('php://stdout', 'w+');
+    	$this->error_handle = fopen('php://stderr', 'w+');
     }
   }
 
@@ -50,6 +50,21 @@ class Logger
       fwrite($handle, $info);
       flock($handle, LOCK_UN);
     }
+  }
+
+  public function read($level)
+  {
+    if (strtolower($level) === 'error') {
+      $handle = &$this->error_handle;
+    } else {
+      $handle = &$this->log_handle;
+    }
+    $log = [];
+    while (($buffer = fgets($handle))) {
+      $temp = explode(' ', $buffer);
+      $log[] = trim(end($temp));
+    }
+    return $log;
   }
 
   public function __destruct()
