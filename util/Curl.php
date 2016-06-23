@@ -61,7 +61,7 @@ class Curl
 				$var = $arg0 + $var;
 				return $this;
 			}else{
-				throw new Exception('Argument 1 passed to '.__METHOD__.
+				throw new \Exception('Argument 1 passed to '.__METHOD__.
 						' must be of the type array, '.gettype($arg0).' given'.
 						' ,called in '.__FILE__.' on line '.__LINE__.' and defined');
 			}
@@ -73,12 +73,12 @@ class Curl
 				$var[$arg0] = $arg1;
 				return $this;
 			}else{
-				throw new Exception('Argument 1 passed to '.__METHOD__.
+				throw new \Exception('Argument 1 passed to '.__METHOD__.
 						' must be of the type integer, '.gettype($arg0).' given'.
 						' ,called in '.__FILE__.' on line '.__LINE__.' and defined');
 			}
 		}else{
-			throw new Exception('Wrong arguments '.$count.' for '.__METHOD__.
+			throw new \Exception('Wrong arguments '.$count.' for '.__METHOD__.
 					',called in '.__FILE__.' on line '.__LINE__.' and defined');
 		}
 	}
@@ -124,12 +124,12 @@ class Curl
 					unset($var[$arg0]);
 				return $this;
 			}else{
-				throw new Exception('Argument 1 passed to '.__METHOD__.
+				throw new \Exception('Argument 1 passed to '.__METHOD__.
 						' must be of the type array or string, '.gettype($arg0).' given'.
 						' ,called in '.__FILE__.' on line '.__LINE__.' and defined');
 			}
 		}else{
-			throw new Exception('Wrong arguments '.$count.' for '.__METHOD__.
+			throw new \Exception('Wrong arguments '.$count.' for '.__METHOD__.
 					',called in '.__FILE__.' on line '.__LINE__.' and defined');
 		}
 	}
@@ -161,7 +161,7 @@ class Curl
 			$arg0 = $arguments[0];
 			return isset($var[$arg0]) ? $var[$arg0] : false;
 		}else{
-			throw new Exception('Wrong arguments '.$count.' for '.__METHOD__.
+			throw new \Exception('Wrong arguments '.$count.' for '.__METHOD__.
 					',called in '.__FILE__.' on line '.__LINE__.' and defined');
 		}
 	}
@@ -177,7 +177,7 @@ class Curl
 			if(!isset($args[1])) $args[1] = true;
 			return $this->_httpRequest($args[0], $args[1], $method);
 		}else{
-			throw new Exception(__CLASS__. ' and its behaviors do not have a method or closure named '.$method);
+			throw new \Exception(__CLASS__. ' and its behaviors do not have a method or closure named '.$method);
 		}
 	}
 	

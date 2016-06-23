@@ -10,3 +10,7 @@ bucket=""
 accessKeyId=""
 accessKeySecret=""
 endpoint=""
+[ftp]
+username=""
+password=""
+host=""

@@ -7,6 +7,8 @@ class RedisDataBase
 
 	public function __construct(array $config = [])
 	{
+		if (!extension_loaded('redis'))
+			throw new \Exception('You should add extension redis');
 		$config = $config + parse_ini_file(__DIR__ . '/../config/db.ini', true)['redis'];
 		try {
 			$host = $config['host'];

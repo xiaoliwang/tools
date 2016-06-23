@@ -3,3 +3,4 @@
 composer.lock
 /log/*
 *.log
+config.ini

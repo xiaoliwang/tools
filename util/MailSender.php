@@ -11,6 +11,8 @@ class MailSender
 
 	public function __construct(array $config = [], array $options = [])
 	{
+		if (!class_exists('PHPMailer'))
+			throw new \Exception('We need framework PHPMailer');
 		$this->options = $options + $this->options;
 		$config = $config + parse_ini_file(__DIR__ . '/../config/main.ini', true)['email'];
 		$mail = new \PHPMailer;

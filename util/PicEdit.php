@@ -7,6 +7,8 @@ class PicEdit
 
 	public function __construct(string $image_path)
 	{
+		if (!extension_loaded('imagick'))
+			throw new \Exception('You should add extension imagick');
 		$imagick = new \Imagick($image_path);	
 		$this->imagick = $imagick;
 	}

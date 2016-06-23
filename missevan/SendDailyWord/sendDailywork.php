@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . '/vendor/autoload.php');
+require(__DIR__ . '/../../vendor/autoload.php');
 use tomcao\tools\util\MailSender;
 use tomcao\tools\util\Logger;
 
@@ -21,10 +21,10 @@ $contents = [
 ];
 
 $receivers = [
-	//'测试' => 'xiaoliwang@missevan.cn',
-	'魔王' => 'mowangsk@missevan.cn',
-	'七夜' => 'liutian7y@missevan.cn',
-	'昂基佬' => 'sa@missevan.cn'
+	'测试' => 'xiaoliwang@missevan.cn',
+	//'魔王' => 'mowangsk@missevan.cn',
+	//'七夜' => 'liutian7y@missevan.cn',
+	//'昂基佬' => 'sa@missevan.cn'
 ];
 
 $emailContent = function () use($contents)

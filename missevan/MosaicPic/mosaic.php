@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . '/vendor/autoload.php');
+require(__DIR__ . '/../../vendor/autoload.php');
 
 use tomcao\tools\util\OssClient;
 use tomcao\tools\util\PicEdit;
@@ -55,7 +55,7 @@ function rmrf(string $dir) {
 
 
 $sql_get_sounds = 'select id, cover_image from m_sound where cover_image != \'\' order by id';	
-	
+
 $sounds = $mysql->query($sql_get_sounds);
 
 $logger->log('mission start');

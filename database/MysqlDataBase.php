@@ -9,6 +9,8 @@ class MysqlDataBase
 
 	public function __construct(array $config = [])
 	{
+		if (!extension_loaded('pdo_mysql'))
+			throw new \Exception('You should add extension pdo_mysql');
 		$config = $config + parse_ini_file(__DIR__ .'/../config/db.ini', true)['mysql'];
 		try {
 			$username = $config['username'];
