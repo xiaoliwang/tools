@@ -24,6 +24,11 @@ class FtpClient
 		ftp_pasv($this->conn_id, $pasv);
 	}
 
+	public function deletefile($remote_file)
+	{
+		return ftp_delete($this->conn_id, $remote_file);
+	}
+
 	public function uploadfile($remote_file, $local_file, $mode = FTP_BINARY)
 	{
 		return ftp_put($this->conn_id, $remote_file, $local_file, $mode);

@@ -8,3 +8,8 @@ password = ""
 host = ""
 port = ""
 auth = ""
+[memcache]
+host = ""
+port = ""
+username = ""
+password = ""

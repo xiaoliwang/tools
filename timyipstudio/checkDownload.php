@@ -1,5 +1,5 @@
 <?php
-$dir = 'D:\file\github\php\Ben2';
+$dir = 'D:\file\github\php\Ben';
 
 function check_dir($dir, $conn_id)
 {
@@ -11,8 +11,8 @@ function check_dir($dir, $conn_id)
 				check_dir($fullpath, $conn_id);
 			} else {
 				if (!filesize($fullpath)) {
-					$new_path = str_replace('D:\file\github\php\Ben2', '', $fullpath);
-					//ftp_get($conn_id, $fullpath, $new_path, FTP_BINARY);
+					$new_path = str_replace('D:\file\github\php\Ben', '', $fullpath);
+					ftp_get($conn_id, $fullpath, $new_path, FTP_BINARY);
 					echo $new_path . "\n";
 				}
 			}
