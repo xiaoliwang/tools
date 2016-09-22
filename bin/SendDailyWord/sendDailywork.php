@@ -40,7 +40,7 @@ $emailContent = function () use($contents)
 };
 
 $mail = new MailSender;
-$logger = new Logger('./log', ['file_prefix' => 'sendEmail_']);
+$logger = new Logger('./log', ['file_prefix' => PRE_SEND_EMAIL]);
 
 foreach ($receivers as $name => $email) {
 	$mail->addAddress($email, $name);

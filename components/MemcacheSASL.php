@@ -1,6 +1,5 @@
 <?php
-
-namespace tomcao\tools\database;
+namespace tomcao\tools\components;
 
 class MemcacheSASL
 {

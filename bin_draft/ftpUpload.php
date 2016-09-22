@@ -1,4 +1,8 @@
+#!/usr/bin/env php
 <?php
+/**
+ * 配合github hook用来提交代码
+ */
 require(__DIR__ . '/../vendor/autoload.php');
 
 use tomcao\tools\util\Logger;

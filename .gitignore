@@ -1,6 +1,5 @@
 /vendor/*
 /config/*.ini
-composer.lock
 /log/*
 *.log
 config.ini

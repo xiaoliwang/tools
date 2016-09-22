@@ -4,11 +4,11 @@ require(__DIR__ . '/../../vendor/autoload.php');
 use tomcao\tools\util\OssClient;
 use tomcao\tools\util\PicEdit;
 use tomcao\tools\util\Logger;
-use tomcao\tools\database\MysqlDataBase;
+use tomcao\tools\components\MysqlDataBase;
 
 $oss = new OssClient;
 $mysql = new MysqlDataBase;
-$logger = new Logger('./log', ['file_prefix' => 'mosaic_']);
+$logger = new Logger('./log', ['file_prefix' => PRE_MOSAIC]);
 
 $base_dir = __DIR__ . '/tmp/mosaic/';
 if (!is_dir($base_dir)) {

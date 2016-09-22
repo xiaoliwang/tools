@@ -1,29 +1,25 @@
+#!/usr/bin/env php
 <?php
-require(__DIR__ . '/vendor/autoload.php');
+/**
+ * 用户操作迁移，从redis迁移至数据库
+ */
+require(__DIR__ . '/../vendor/autoload.php');
 
-use tomcao\tools\database\MysqlDataBase;
-use tomcao\tools\database\RedisDataBase;
+use tomcao\tools\components\MysqlDataBase;
+use tomcao\tools\components\RedisDataBase;
 use tomcao\tools\util\Logger;
 
 $mysql = new MysqlDataBase;
 $redis = new RedisDataBase;
-$logger = new Logger('./log', ['file_prefix' => 'person_operation_']);
-
-function getUserId($data_key)
-{
-	return explode('_', $data_key)[2];
-}
-
-function separate($uid, $infos)
-{
-	$data_arr = explode('_', $infos);
-	array_unshift($data_arr, $uid);
-	$data_arr = array_pad($data_arr, 5, 0);
-	return $data_arr;
-}
+$logger = new Logger('./log', ['file_prefix' => PERSON_OPERATION]);
 
 $logger->log('mission start');
+
+/**
+ * 使用游标获取用户操作的KEY
+ */
 try {
+	
 	$begin = null;
 	$fields = ['uid', 'operation', 'time', 'equip', 'eid'];
 	$data_key_patten = 'Person_Operation_*_sound';
@@ -43,4 +39,20 @@ try {
 	$logger->log('error');
 	$logger->error($e->getMessage());
 }
+
 $logger->log('finished');
+
+// 获取用户id
+function getUserId($data_key)
+{
+	return explode('_', $data_key)[2];
+}
+
+// 将数据标准化
+function separate($uid, $infos)
+{
+	$data_arr = explode('_', $infos);
+	array_unshift($data_arr, $uid);
+	$data_arr = array_pad($data_arr, 5, 0);
+	return $data_arr;
+}

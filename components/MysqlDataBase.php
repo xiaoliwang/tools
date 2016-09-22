@@ -1,5 +1,5 @@
 <?php
-namespace tomcao\tools\database;
+namespace tomcao\tools\components;
 
 use tomcao\tools\exception\SqlException;
 

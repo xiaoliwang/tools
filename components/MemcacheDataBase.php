@@ -1,6 +1,5 @@
 <?php
-
-namespace tomcao\tools\database;
+namespace tomcao\tools\components;
 
 use stdClass;
 use Exception;

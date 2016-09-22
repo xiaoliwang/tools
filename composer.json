@@ -2,10 +2,14 @@
 	"autoload": {
 		"psr-4": {
 			"tomcao\\tools\\": ""
-		}
+		},
+        "files": [
+        	"const/PRELOGGER.php"
+        ]
 	},
 	"require": {
 		"phpmailer/phpmailer": "^5.2",
-		"aliyuncs/oss-sdk-php": "^2.0"
+		"aliyuncs/oss-sdk-php": "^2.0",
+		"guzzlehttp/guzzle": "^6.2"
 	}
 }

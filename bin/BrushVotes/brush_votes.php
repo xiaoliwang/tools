@@ -1,11 +1,14 @@
 <?php
+/**
+ * 给活动刷票的程序
+ */
 set_time_limit(0);
 require(__DIR__ . '/../../vendor/autoload.php');
 
 use tomcao\tools\util\Curl;
 use tomcao\tools\util\Logger;
 
-$logger = new Logger('./log', ['file_prefix' => 'shuapiao_']);
+$logger = new Logger('./log', ['file_prefix' => PRE_BRUSH_VOTES]);
 
 // 获取活动列表
 do {
